@@ -9,7 +9,7 @@ import { NoteCard } from "@/components/NoteCard";
 
 export default async function NotesPage() {
   const user = await currentUser();
-  if (!user) redirect("/");
+  if (!user) return null;
 
   const notes = await prisma.note.findMany({
     where: { userId: user.id },

@@ -7,7 +7,7 @@ import { ArrowRight, FileText, ListTodo } from "lucide-react";
 
 export default async function DashboardHome() {
   const user = await currentUser();
-  if (!user) redirect("/");
+  if (!user) return null;
 
   // Synchronisation utilisateur (on la garde ici car c'est la page d'entrée)
   let dbUser = await prisma.user.findUnique({ where: { id: user.id } });
