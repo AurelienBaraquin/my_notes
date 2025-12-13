@@ -26,6 +26,10 @@ export default async function DashboardHome() {
     where: { userId: user.id }
   });
 
+  const todosCount = await prisma.todo.count({
+    where: { userId: user.id }
+  });
+
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold">Bonjour, {user.firstName} 👋</h1>
@@ -59,7 +63,7 @@ export default async function DashboardHome() {
             </div>
             <div>
                 <p className="text-sm text-gray-500">Tâches en cours</p>
-                <p className="text-2xl font-bold">0</p>
+                <p className="text-2xl font-bold">{todosCount}</p>
             </div>
           </div>
            <Link href="/dashboard/todos">
