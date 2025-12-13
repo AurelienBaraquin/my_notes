@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input"; // Si tu ne l'as pas : npx shadcn@latest add input
 import { Textarea } from "@/components/ui/textarea"; // Si tu ne l'as pas : npx shadcn@latest add textarea
-import { createNote } from "../actions";
+import { createNote, deleteNote } from "../actions";
 
 export default async function Dashboard() {
   // 1. Récupérer l'utilisateur Clerk
@@ -51,17 +51,33 @@ export default async function Dashboard() {
         <Button type="submit">Ajouter la note</Button>
       </form>
 
-      {/* 5. La Liste des notes */}
+{/* 5. La Liste des notes */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {notes.map((note) => (
-          <div key={note.id} className="border p-4 rounded-lg shadow-sm hover:shadow-md transition">
-            <h3 className="font-bold text-lg mb-2">{note.title}</h3>
-            <p className="text-gray-600 text-sm whitespace-pre-wrap">
-              {note.content}
-            </p>
-            <p className="text-xs text-gray-400 mt-4">
-              {note.createdAt.toLocaleDateString()}
-            </p>
+          <div key={note.id} className="border p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col justify-between">
+            {/* Contenu de la note */}
+            <div>
+              <h3 className="font-bold text-lg mb-2">{note.title}</h3>
+              <p className="text-gray-600 text-sm whitespace-pre-wrap mb-4">
+                {note.content}
+              </p>
+            </div>
+
+            {/* Pied de la note avec date et bouton supprimer */}
+            <div className="flex justify-between items-center mt-2 border-t pt-2">
+              <p className="text-xs text-gray-400">
+                {note.createdAt.toLocaleDateString()}
+              </p>
+
+              {/* Formulaire de suppression */}
+              {/* On importe l'action deleteNote qu'on vient de créer (n'oublie pas l'import en haut du fichier !) */}
+              <form action={deleteNote}>
+                <input type="hidden" name="id" value={note.id} />
+                <Button variant="destructive" size="sm">
+                   Supprimer
+                </Button>
+              </form>
+            </div>
           </div>
         ))}
         

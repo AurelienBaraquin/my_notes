@@ -28,3 +28,23 @@ export async function createNote(formData: FormData) {
   // 4. On rafraîchit la page pour afficher la nouvelle note instantanément
   revalidatePath("/dashboard");
 }
+
+export async function deleteNote(formData: FormData) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("Vous devez être connecté");
+  }
+
+  const noteId = formData.get("id") as string;
+
+  // Suppression sécurisée : On vérifie l'ID ET le propriétaire
+  await prisma.note.delete({
+    where: {
+      id: noteId,
+      userId: userId, // 👈 C'est cette ligne qui sécurise tout
+    },
+  });
+
+  revalidatePath("/dashboard");
+}
