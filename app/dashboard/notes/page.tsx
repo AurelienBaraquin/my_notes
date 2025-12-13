@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { createNote } from "@/app/actions"; // Utilise @/app/actions
+import { createNote } from "./actions"; // Utilise @/app/actions
 import { NoteCard } from "@/components/NoteCard";
 
 export default async function NotesPage() {

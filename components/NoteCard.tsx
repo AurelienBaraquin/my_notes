@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 // On va devoir passer l'action deleteNote en prop ou l'importer si c'est une server action
 // Pour faire simple et propre, on va garder l'action dans le formulaire ici
-import { deleteNote } from "@/app/actions"; 
+import { deleteNote } from "@/app/dashboard/notes/actions";; 
 import { Note } from "@prisma/client"; // Le type généré automatiquement par Prisma !
 
 export function NoteCard({ note }: { note: Note }) {
