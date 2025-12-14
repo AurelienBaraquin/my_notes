@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/dashboard/settings/ModeToggle"; // Vérifie bien le chemin d'import !
+import { ModeToggle } from "@/components/dashboard/settings/ModeToggle";
 import { Button } from "@/components/ui/button";
 import {
   Card,

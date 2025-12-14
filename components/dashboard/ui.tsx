@@ -18,17 +18,22 @@ export function DashboardShell({
 // 2. L'EN-TÊTE (TITRE + BADGE)
 export function DashboardHeader({
   heading,
+  text,
   count,
   children
 }: {
   heading: string;
+  text?: string; // Optionnel
   count?: number; // Optionnel
   children?: React.ReactNode; // Si on veut ajouter un bouton à droite par exemple
 }) {
   return (
     <div className="flex justify-between items-center mb-8">
-      <h1 className="text-3xl font-bold text-foreground">{heading}</h1>
-      
+      <div className="space-y-1">
+        <h1 className="text-3xl font-bold text-foreground">{heading}</h1>
+        {text && <p className="text-muted-foreground">{text}</p>}
+      </div>
+
       {count !== undefined && (
         <span className="bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100 font-bold px-3 py-1 rounded-full text-sm">
           {count} {count > 1 ? "éléments" : "élément"}

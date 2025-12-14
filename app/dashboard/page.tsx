@@ -3,7 +3,6 @@ import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, FileText, ListTodo } from "lucide-react";
-// 👇 Import de tes briques UI
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
 export default async function DashboardHome() {

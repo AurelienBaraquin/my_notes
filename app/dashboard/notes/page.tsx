@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createNote } from "./actions";
 import { NoteCard } from "@/components/dashboard/notes/NoteCard";
-// 👇 On importe nos nouvelles briques UI
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
 export default async function NotesPage() {
