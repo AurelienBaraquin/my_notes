@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createTodo } from "./actions";
 import { TodoList } from "@/components/dashboard/todos/TodoList"
-import { Plus } from "lucide-react";
+import { CreateTodoForm } from "@/components/dashboard/todos/CreateTodoForm";
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
 export default async function TodosPage() {
@@ -22,18 +22,7 @@ export default async function TodosPage() {
       <DashboardHeader heading="Mes Tâches" count={todos.length} />
 
       <DashboardCard className="mb-8">
-        <form action={createTodo} className="flex gap-2">
-          <Input 
-            name="title" 
-            placeholder="Ajouter une nouvelle tâche..." 
-            className="flex-1"
-            required 
-            autoComplete="off"
-          />
-          <Button type="submit">
-            <Plus size={18} className="mr-2" /> Ajouter
-          </Button>
-        </form>
+        <CreateTodoForm />
       </DashboardCard>
 
       <div className="space-y-3">

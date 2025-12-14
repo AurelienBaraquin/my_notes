@@ -3,9 +3,25 @@
 import { Button } from "@/components/ui/button";
 import { deleteNote } from "@/app/dashboard/notes/actions";
 import { Note } from "@prisma/client";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export function NoteCard({ note }: { note: Note }) {
+  const handleDelete = () => {
+    // On passe la promesse (l'action serveur) à toast.promise
+    // Note : il faut recréer un FormData car deleteNote en attend un
+    const formData = new FormData();
+    formData.append("id", note.id);
+
+    const promise = deleteNote(formData);
+
+    toast.promise(promise, {
+      loading: 'Suppression de la note...',
+      success: 'Note supprimée définitivement ! 🗑️',
+      error: 'Une erreur est survenue lors de la suppression',
+    });
+  };
+
   return (
     <motion.div 
         whileHover={{ 
@@ -30,10 +46,13 @@ export function NoteCard({ note }: { note: Note }) {
             year: "numeric"
           })}
         </p>
-        <form action={deleteNote}>
-            <input type="hidden" name="id" value={note.id} />
-            <Button variant="destructive" size="sm">Supprimer</Button>
-        </form>
+        <Button 
+            variant="destructive" 
+            size="sm" 
+            onClick={handleDelete}
+        >
+            Supprimer
+        </Button>
       </div>
     </motion.div>
   );

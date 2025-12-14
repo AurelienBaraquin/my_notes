@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createNote } from "./actions";
 import { NotesGrid } from "@/components/dashboard/notes/NotesGrid";
+import  { CreateNoteForm } from "@/components/dashboard/notes/CreateNoteForm";
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
 export default async function NotesPage() {
@@ -17,19 +18,12 @@ export default async function NotesPage() {
   });
 
   return (
-    // Plus de classes CSS ici ! Juste de la structure sémantique.
     <DashboardShell>
       
       <DashboardHeader heading="Mes Notes" count={notes.length} />
 
       <DashboardCard title="Nouvelle note" className="mb-10">
-        <form action={createNote} className="space-y-4">
-          <Input name="title" placeholder="Titre de la note..." required />
-          <Textarea name="content" placeholder="Contenu..." required />
-          <div className="flex justify-end">
-            <Button type="submit">Ajouter</Button>
-          </div>
-        </form>
+        <CreateNoteForm />
       </DashboardCard>
 
       <NotesGrid notes={notes} />
