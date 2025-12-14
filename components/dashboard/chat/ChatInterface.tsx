@@ -51,7 +51,7 @@ export function ChatInterface({ initialMessages, currentUserId }: ChatInterfaceP
   }, [messages]);
 
   return (
-    <div className="flex flex-col h-[600px] border rounded-xl bg-card overflow-hidden shadow-sm">
+    <div className="flex flex-col h-150 border rounded-xl bg-card overflow-hidden shadow-sm">
       {/* ZONE DE MESSAGES (Scrollable) */}
       <div className="flex-1 overflow-y-auto p-4 bg-secondary/10">
         {messages.map((msg) => (
@@ -70,12 +70,12 @@ export function ChatInterface({ initialMessages, currentUserId }: ChatInterfaceP
       <div className="p-4 bg-background border-t">
         <form
           action={async (formData) => {
-            // Optimistic UI : On pourrait ajouter le message tout de suite ici,
-            // mais Pusher est tellement rapide (<100ms) qu'on va laisser Pusher faire le retour.
-            await sendMessage(formData);
             // On vide l'input manuellement via ref si besoin, ou via form reset
             // (ici méthode simple : HTMLFormElement.reset())
             (document.getElementById("chat-form") as HTMLFormElement).reset();
+            // Optimistic UI : On pourrait ajouter le message tout de suite ici,
+            // mais Pusher est tellement rapide (<100ms) qu'on va laisser Pusher faire le retour.
+            await sendMessage(formData);
           }}
           id="chat-form"
           className="flex gap-2"
