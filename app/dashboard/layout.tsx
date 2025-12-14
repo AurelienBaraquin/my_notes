@@ -10,9 +10,9 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950">
       {/* --- SIDEBAR (Partie Gauche) --- */}
-      <aside className="w-64 bg-white border-r hidden md:block">
+      <aside className="w-64 bg-background border-r hidden md:block">
         <div className="p-6">
           <h2 className="text-2xl font-bold tracking-tight">My Notes</h2>
         </div>
@@ -40,7 +40,7 @@ export default function DashboardLayout({
       {/* --- MAIN CONTENT (Partie Droite) --- */}
       <div className="flex-1 flex flex-col">
         {/* Header du haut */}
-        <header className="h-16 border-b bg-white flex items-center justify-end px-8">
+        <header className="h-16 border-b bg-background flex items-center justify-end px-8">
            <UserButton />
         </header>
 

@@ -20,7 +20,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
   };
 
   return (
-    <div className="flex items-center justify-between p-4 border rounded-lg bg-white shadow-sm transition hover:shadow-md">
+    <div className="flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm transition hover:shadow-md">
       <div className="flex items-center gap-3">
         {/* Checkbox Shadcn */}
         <Checkbox 
@@ -32,8 +32,11 @@ export function TodoItem({ todo }: { todo: Todo }) {
         
         <label 
           htmlFor={todo.id} 
+          // Pour le texte : dark:text-gray-100 si non complété
           className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer ${
-            isCompleted ? "line-through text-gray-400" : "text-slate-700"
+            isCompleted 
+            ? "line-through text-gray-400" 
+            : "text-slate-700 dark:text-gray-100" 
           }`}
         >
           {todo.title}

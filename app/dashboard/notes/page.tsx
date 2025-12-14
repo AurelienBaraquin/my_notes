@@ -19,13 +19,13 @@ export default async function NotesPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold text-slate-800">Mes Notes</h1>
+        <h1 className="text-3xl font-bold">Mes Notes</h1>
         <span className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full text-sm">
           {notes.length} notes
         </span>
       </div>
 
-      <form action={createNote} className="space-y-4 border p-6 rounded-lg bg-white shadow-sm mb-10">
+      <form action={createNote} className="space-y-4 border p-6 rounded-lg bg-card text-card-foreground shadow-sm mb-10">
         <h2 className="font-semibold text-lg">Nouvelle note</h2>
         <Input name="title" placeholder="Titre de la note..." required />
         <Textarea name="content" placeholder="Contenu..." required />

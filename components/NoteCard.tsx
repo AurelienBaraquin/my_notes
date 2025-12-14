@@ -8,7 +8,7 @@ import { Note } from "@prisma/client"; // Le type généré automatiquement par 
 
 export function NoteCard({ note }: { note: Note }) {
   return (
-    <div className="border bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col justify-between h-full">
+    <div className="border bg-card text-card-foreground p-4 rounded-lg shadow-sm hover:shadow-md transition flex flex-col justify-between h-full">
       <div>
         <h3 className="font-bold text-lg mb-2">{note.title}</h3>
         <p className="text-gray-600 text-sm whitespace-pre-wrap mb-4">

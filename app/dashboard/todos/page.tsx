@@ -17,10 +17,14 @@ export default async function TodosPage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-slate-800 mb-8">Mes Tâches</h1>
-
+      <div className="flex justify-between items-center mb-10">
+        <h1 className="text-3xl font-bold">Mes Tâches</h1>
+        <span className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full text-sm">
+          {todos.length} tâches
+        </span>
+      </div>  
       {/* Formulaire d'ajout rapide */}
-      <div className="bg-white p-4 rounded-xl border shadow-sm mb-8">
+      <div className="bg-card text-card-foreground p-4 rounded-xl border shadow-sm mb-8">
         <form action={createTodo} className="flex gap-2">
           <Input 
             name="title" 

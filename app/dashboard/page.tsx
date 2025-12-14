@@ -38,7 +38,7 @@ export default async function DashboardHome() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         
         {/* Carte Notes */}
-        <div className="bg-white p-6 rounded-xl border shadow-sm hover:shadow-md transition">
+        <div className="bg-card text-card-foreground p-6 rounded-xl border shadow-sm hover:shadow-md transition">
           <div className="flex items-center gap-4 mb-4">
             <div className="p-3 bg-blue-100 text-blue-600 rounded-lg">
                 <FileText size={24} />
@@ -56,7 +56,7 @@ export default async function DashboardHome() {
         </div>
 
         {/* Carte Todos (Vide pour l'instant) */}
-        <div className="bg-white p-6 rounded-xl border shadow-sm hover:shadow-md transition">
+        <div className="bg-card text-card-foreground p-6 rounded-xl border shadow-sm hover:shadow-md transition">
           <div className="flex items-center gap-4 mb-4">
             <div className="p-3 bg-green-100 text-green-600 rounded-lg">
                 <ListTodo size={24} />
