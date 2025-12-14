@@ -23,8 +23,12 @@ export function NoteCard({ note }: { note: Note }) {
       </div>
 
       <div className="flex justify-between items-center mt-2 border-t pt-2">
-        <p className="text-xs text-muted-foreground">
-          {note.createdAt.toLocaleDateString()}
+        <p className="text-xs text-muted-foreground" suppressHydrationWarning>
+          {note.createdAt.toLocaleDateString("fr-FR", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+          })}
         </p>
         <form action={deleteNote}>
             <input type="hidden" name="id" value={note.id} />

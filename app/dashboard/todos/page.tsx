@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createTodo } from "./actions";
-import { TodoList } from "@/components/dashboard/todos/TodoList";
+import { TodoList } from "@/components/dashboard/todos/TodoList"
 import { Plus } from "lucide-react";
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
