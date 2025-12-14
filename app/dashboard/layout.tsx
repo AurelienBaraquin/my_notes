@@ -1,50 +1,69 @@
+"use client"; // 👈 Indispensable maintenant car on utilise usePathname (interactivité)
+
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
-import { Home, Settings, ListTodo, Notebook } from "lucide-react"; // Des icônes gratuites
-
-// Si tu n'as pas lucide-react (souvent installé par défaut avec shadcn), sinon : npm install lucide-react
+import { usePathname } from "next/navigation"; // Hook pour savoir sur quelle page on est
+import { Home, Settings, ListTodo, Notebook } from "lucide-react";
+import { cn } from "@/lib/utils"; // Utilitaire Shadcn pour gérer les classes conditionnelles
 
 export default function DashboardLayout({
-  children, // C'est ici que s'affichera ta page.tsx
+  children,
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname(); // ex: "/dashboard/notes"
+
+  // 1. On définit nos données ici.
+  // Si demain tu veux changer l'ordre ou l'icône, tu touches juste à ce tableau.
+  const navItems = [
+    { name: "Vue d'ensemble", href: "/dashboard", icon: Home },
+    { name: "Mes Notes", href: "/dashboard/notes", icon: Notebook },
+    { name: "Tâches", href: "/dashboard/todos", icon: ListTodo },
+    { name: "Paramètres", href: "/dashboard/settings", icon: Settings },
+  ];
+
   return (
-    <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950">
-      {/* --- SIDEBAR (Partie Gauche) --- */}
-      <aside className="w-64 bg-background border-r hidden md:block">
+    <div className="flex min-h-screen bg-secondary/20">
+      {/* --- SIDEBAR --- */}
+      <aside className="w-64 bg-card border-r hidden md:block">
         <div className="p-6">
-          <h2 className="text-2xl font-bold tracking-tight">My Notes</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-foreground">My Notes</h2>
         </div>
         
         <nav className="flex flex-col gap-2 px-4">
-        <Link href="/dashboard" className="flex items-center gap-3 px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-md transition font-medium"> 
-            <Home size={20} />
-            Vue d'ensemble
-        </Link>
-        <Link href="/dashboard/notes" className="flex items-center gap-3 px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-md transition font-medium"> 
-            <Notebook size={20} />
-            Mes Notes
-        </Link>
-        <Link href="/dashboard/todos" className="flex items-center gap-3 px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-md transition font-medium">
-            <ListTodo size={20} />
-            Tâches
-        </Link>
-        <Link href="/dashboard/settings" className="flex items-center gap-3 px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-md transition font-medium">
-            <Settings size={20} />
-            Paramètres
-        </Link>
+          {/* 2. On boucle (map) sur le tableau */}
+          {navItems.map((item) => {
+            // On vérifie si le lien est actif
+            const isActive = pathname === item.href;
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  // Classes de base (Communes)
+                  "flex items-center gap-3 px-4 py-2 rounded-md transition-colors font-medium text-sm",
+                  
+                  // Classes conditionnelles (Active vs Inactive)
+                  isActive 
+                    ? "bg-primary text-primary-foreground shadow-sm" // Style si actif (foncé)
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground" // Style si inactif (gris)
+                )}
+              >
+                <item.icon size={20} />
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
       </aside>
 
-      {/* --- MAIN CONTENT (Partie Droite) --- */}
+      {/* --- MAIN CONTENT --- */}
       <div className="flex-1 flex flex-col">
-        {/* Header du haut */}
-        <header className="h-16 border-b bg-background flex items-center justify-end px-8">
+        <header className="h-16 border-b bg-card flex items-center justify-end px-8">
            <UserButton />
         </header>
 
-        {/* Le contenu de la page changeante */}
         <main className="flex-1 p-8">
             {children}
         </main>
