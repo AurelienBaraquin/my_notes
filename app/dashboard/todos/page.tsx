@@ -3,8 +3,10 @@ import { currentUser } from "@clerk/nextjs/server";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createTodo } from "./actions";
-import { TodoItem } from "@/components/TodoItem";
+import { TodoItem } from "@/components/dashboard/todos/TodoItem";
 import { Plus } from "lucide-react";
+// 👇 Imports
+import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
 export default async function TodosPage() {
   const user = await currentUser();
@@ -16,15 +18,11 @@ export default async function TodosPage() {
   });
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <div className="flex justify-between items-center mb-10">
-        <h1 className="text-3xl font-bold">Mes Tâches</h1>
-        <span className="bg-blue-100 text-blue-700 font-bold px-3 py-1 rounded-full text-sm">
-          {todos.length} tâches
-        </span>
-      </div>  
-      {/* Formulaire d'ajout rapide */}
-      <div className="bg-card text-card-foreground p-4 rounded-xl border shadow-sm mb-8">
+    <DashboardShell className="max-w-2xl"> {/* On peut surcharger la largeur ici ! */}
+      
+      <DashboardHeader heading="Mes Tâches" count={todos.length} />
+
+      <DashboardCard className="mb-8">
         <form action={createTodo} className="flex gap-2">
           <Input 
             name="title" 
@@ -37,9 +35,8 @@ export default async function TodosPage() {
             <Plus size={18} className="mr-2" /> Ajouter
           </Button>
         </form>
-      </div>
+      </DashboardCard>
 
-      {/* Liste des tâches */}
       <div className="space-y-3">
         {todos.length === 0 ? (
             <p className="text-center text-gray-500 py-10">Rien à faire... Profites-en ! 😎</p>
@@ -49,6 +46,7 @@ export default async function TodosPage() {
             ))
         )}
       </div>
-    </div>
+
+    </DashboardShell>
   );
 }
