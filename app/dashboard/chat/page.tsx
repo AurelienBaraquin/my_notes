@@ -18,7 +18,7 @@ export default async function ChatPage() {
   });
 
   return (
-    <DashboardShell>
+    <DashboardShell className="h-full flex flex-col overflow-hidden">
       <DashboardHeader 
         heading="Chat Général" 
         text="Discutez en temps réel avec les autres membres."
