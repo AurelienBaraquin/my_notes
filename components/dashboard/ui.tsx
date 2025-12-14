@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils"; // Utilitaire Shadcn pour fusionner les classes si besoin
+import { cn } from "@/lib/utils";
 
 // 1. LE CONTENEUR PRINCIPAL
 export function DashboardShell({
@@ -23,9 +23,9 @@ export function DashboardHeader({
   children
 }: {
   heading: string;
-  text?: string; // Optionnel
-  count?: number; // Optionnel
-  children?: React.ReactNode; // Si on veut ajouter un bouton à droite par exemple
+  text?: string;
+  count?: number;
+  children?: React.ReactNode;
 }) {
   return (
     <div className="flex justify-between items-center mb-8">
@@ -35,7 +35,7 @@ export function DashboardHeader({
       </div>
 
       {count !== undefined && (
-        <span className="bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100 font-bold px-3 py-1 rounded-full text-sm">
+        <span className="bg-secondary text-primary font-bold px-3 py-1 rounded-full text-sm">
           {count} {count > 1 ? "éléments" : "élément"}
         </span>
       )}
@@ -45,7 +45,7 @@ export function DashboardHeader({
   );
 }
 
-// 3. LA CARTE DE CONTENU (FORMULAIRE, ETC.)
+// 3. LA CARTE DE CONTENU
 export function DashboardCard({
   children,
   title,

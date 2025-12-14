@@ -1,28 +1,23 @@
-"use client"; // 👈 Obligatoire pour utiliser onClick ou onChange
+"use client";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Todo } from "@prisma/client";
 import { toggleTodo, deleteTodo } from "@/app/dashboard/todos/actions";
-import { Trash2 } from "lucide-react"; // npm install lucide-react si pas installé
+import { Trash2 } from "lucide-react";
 import { useState } from "react";
-
-// Si tu n'as pas le composant Checkbox : npx shadcn@latest add checkbox
+import { cn } from "@/lib/utils";
 
 export function TodoItem({ todo }: { todo: Todo }) {
-  // On utilise un état local pour que l'interface réagisse IMMÉDIATEMENT (Optimistic UI)
   const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
 
   const handleToggle = async () => {
-    // 1. On change visuellement tout de suite (super rapide pour l'user)
     setIsCompleted(!isCompleted);
-    // 2. On envoie la requête au serveur en arrière-plan
     await toggleTodo(todo.id, !isCompleted);
   };
 
   return (
     <div className="flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm transition hover:shadow-md">
       <div className="flex items-center gap-3">
-        {/* Checkbox Shadcn */}
         <Checkbox 
           id={todo.id} 
           checked={isCompleted} 
@@ -32,12 +27,12 @@ export function TodoItem({ todo }: { todo: Todo }) {
         
         <label 
           htmlFor={todo.id} 
-          // Pour le texte : dark:text-gray-100 si non complété
-          className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer ${
+          className={cn(
+            "text-sm font-medium leading-none cursor-pointer transition-colors",
             isCompleted 
-            ? "line-through text-gray-400" 
-            : "text-slate-700 dark:text-gray-100" 
-          }`}
+              ? "line-through text-muted-foreground" // Gris standard si fini
+              : "text-foreground" // Couleur normale (Noir/Blanc) sinon
+          )}
         >
           {todo.title}
         </label>
@@ -45,7 +40,7 @@ export function TodoItem({ todo }: { todo: Todo }) {
 
       <form action={deleteTodo}>
         <input type="hidden" name="id" value={todo.id} />
-        <button type="submit" className="text-gray-400 hover:text-red-500 transition">
+        <button type="submit" className="text-muted-foreground hover:text-destructive transition">
           <Trash2 size={18} />
         </button>
       </form>
