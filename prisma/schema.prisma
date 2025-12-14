@@ -19,6 +19,7 @@ model User {
   // Relation : Un utilisateur peut avoir plusieurs notes
   notes     Note[]
   todos     Todo[]
+  chatMessages ChatMessage[]
 }
 
 // 3. Le modèle Note
@@ -44,4 +45,13 @@ model Todo {
   
   userId      String
   user        User     @relation(fields: [userId], references: [id])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }

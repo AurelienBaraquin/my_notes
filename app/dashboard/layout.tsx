@@ -3,7 +3,7 @@
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Settings, ListTodo, Notebook } from "lucide-react";
+import { Home, Settings, ListTodo, Notebook, MessageSquareText } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function DashboardLayout({
@@ -17,6 +17,7 @@ export default function DashboardLayout({
     { name: "Vue d'ensemble", href: "/dashboard", icon: Home },
     { name: "Mes Notes", href: "/dashboard/notes", icon: Notebook },
     { name: "Tâches", href: "/dashboard/todos", icon: ListTodo },
+    { name: "Chat", href: "/dashboard/chat", icon: MessageSquareText },
     { name: "Paramètres", href: "/dashboard/settings", icon: Settings },
   ];
 
