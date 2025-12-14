@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createNote } from "./actions";
-import { NoteCard } from "@/components/dashboard/notes/NoteCard";
+import { NotesGrid } from "@/components/dashboard/notes/NotesGrid";
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
 export default async function NotesPage() {
@@ -32,11 +32,7 @@ export default async function NotesPage() {
         </form>
       </DashboardCard>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {notes.map((note) => (
-          <NoteCard key={note.id} note={note} />
-        ))}
-      </div>
+      <NotesGrid notes={notes} />
 
     </DashboardShell>
   );
