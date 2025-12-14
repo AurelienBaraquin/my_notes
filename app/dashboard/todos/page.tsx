@@ -3,7 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createTodo } from "./actions";
-import { TodoItem } from "@/components/dashboard/todos/TodoItem";
+import { TodoList } from "@/components/dashboard/todos/TodoList";
 import { Plus } from "lucide-react";
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
 
@@ -40,9 +40,7 @@ export default async function TodosPage() {
         {todos.length === 0 ? (
             <p className="text-center text-gray-500 py-10">Rien à faire... Profites-en ! 😎</p>
         ) : (
-            todos.map((todo) => (
-                <TodoItem key={todo.id} todo={todo} />
-            ))
+            <TodoList todos={todos} />
         )}
       </div>
 

@@ -6,6 +6,7 @@ import { toggleTodo, deleteTodo } from "@/app/dashboard/todos/actions";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 export function TodoItem({ todo }: { todo: Todo }) {
   const [isCompleted, setIsCompleted] = useState(todo.isCompleted);
@@ -16,7 +17,13 @@ export function TodoItem({ todo }: { todo: Todo }) {
   };
 
   return (
-    <div className="flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm transition hover:shadow-md">
+    <motion.div
+      whileHover={{
+        scale: 1.02,
+        transition: { type: "spring", stiffness: 400, damping: 10 },
+      }}
+      className="flex items-center justify-between p-4 border rounded-lg bg-card text-card-foreground shadow-sm"
+    >
       <div className="flex items-center gap-3">
         <Checkbox 
           id={todo.id} 
@@ -44,6 +51,6 @@ export function TodoItem({ todo }: { todo: Todo }) {
           <Trash2 size={18} />
         </button>
       </form>
-    </div>
+    </motion.div>
   );
 }
