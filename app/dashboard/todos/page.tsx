@@ -4,8 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { createTodo } from "./actions";
 import { TodoList } from "@/components/dashboard/todos/TodoList"
-import { CreateTodoForm } from "@/components/dashboard/todos/CreateTodoForm";
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
+import { SmartForm } from "@/components/SmartForm";
+import { Plus } from "lucide-react";
 
 export default async function TodosPage() {
   const user = await currentUser();
@@ -22,16 +23,25 @@ export default async function TodosPage() {
       <DashboardHeader heading="Mes Tâches" count={todos.length} />
 
       <DashboardCard className="mb-8">
-        <CreateTodoForm />
+        <SmartForm 
+          action={createTodo} 
+          successMessage="Tâche créée avec succès ! 🎉"
+          className="flex gap-2" // On définit le layout horizontal ici
+        >
+          <Input 
+            name="title" 
+            placeholder="Ajouter une nouvelle tâche..." 
+            className="flex-1"
+            required 
+            autoComplete="off"
+          />
+          <Button type="submit">
+            <Plus size={18} className="mr-2" /> Ajouter
+          </Button>
+        </SmartForm>
       </DashboardCard>
 
-      <div className="space-y-3">
-        {todos.length === 0 ? (
-            <p className="text-center text-gray-500 py-10">Rien à faire... Profites-en ! 😎</p>
-        ) : (
-            <TodoList todos={todos} />
-        )}
-      </div>
+      <TodoList todos={todos} />
 
     </DashboardShell>
   );

@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { createNote } from "./actions";
 import { NotesGrid } from "@/components/dashboard/notes/NotesGrid";
-import  { CreateNoteForm } from "@/components/dashboard/notes/CreateNoteForm";
 import { DashboardShell, DashboardHeader, DashboardCard } from "@/components/dashboard/ui";
+import { SmartForm } from "@/components/SmartForm";
+import { Plus } from "lucide-react";
 
 export default async function NotesPage() {
   const user = await currentUser();
@@ -23,7 +24,19 @@ export default async function NotesPage() {
       <DashboardHeader heading="Mes Notes" count={notes.length} />
 
       <DashboardCard title="Nouvelle note" className="mb-10">
-        <CreateNoteForm />
+        <SmartForm 
+          action={createNote} 
+          successMessage="Note ajoutée au carnet ! 📝"
+          className="space-y-4" // Layout vertical
+          >
+          <Input name="title" placeholder="Titre de la note..." required />
+          <Textarea name="content" placeholder="Contenu..." required />
+          <div className="flex justify-end">
+            <Button type="submit">
+              <Plus size={18} className="mr-2" /> Ajouter
+            </Button>
+          </div>
+        </SmartForm>
       </DashboardCard>
 
       <NotesGrid notes={notes} />
