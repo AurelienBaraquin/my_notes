@@ -12,8 +12,14 @@ export function ChatBubble({ content, isMe, username, createdAt }: ChatBubblePro
     <div className={cn("flex flex-col mb-4", isMe ? "items-end" : "items-start")}>
       <div className="flex items-center gap-2 mb-1">
         <span className="text-xs text-muted-foreground font-medium">{username}</span>
-        <span className="text-[10px] text-muted-foreground/60">
-            {new Date(createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        <span 
+          className="text-[10px] text-muted-foreground/60"
+          suppressHydrationWarning 
+        >
+            {new Date(createdAt).toLocaleTimeString("fr-FR", { 
+              hour: '2-digit', 
+              minute: '2-digit' 
+            })}
         </span>
       </div>
       <div
